@@ -1,3 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Hello() {
-  return <p>Hello</p>;
+  const navigate = useNavigate();
+
+  const movePage = () => {
+    navigate("/test");
+  };
+
+  return (
+    <div>
+      <p>Hello</p>
+      <button onClick={movePage}>이동</button>
+    </div>
+  );
 }

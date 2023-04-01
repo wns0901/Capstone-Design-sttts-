@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSpeechRecognition } from "react-speech-kit";
 
 function Test() {
@@ -18,16 +20,19 @@ function Test() {
       alert("로그인 완료");
     }
   };
+  const navigate = useNavigate();
 
   return (
     <div>
       <div>
-        <span>{id}</span>
+        <span>id : </span>
+        <input defaultValue={id}></input>
         <button onMouseUp={listen}>🎤</button>
         <button onMouseUp={stop}>멈춤</button>
       </div>
       <div>
-        <span>{pw}</span>
+        <span>pw : </span>
+        <input defaultValue={pw}></input>
         <button onMouseUp={listen}>🎤</button>
         <button onMouseUp={stop}>멈춤</button>
         {listening && <div>음성인식 활성화 중</div>}
@@ -35,6 +40,12 @@ function Test() {
       <div>
         <button onMouseUp={login}>로그인</button>
       </div>
+      <button
+        onClick={async () => {
+          const result = await axios.get("http://localhost:3000/app");
+          console.log(result);
+        }}
+      />
     </div>
   );
 }
