@@ -4,25 +4,27 @@ import { useSpeechRecognition } from "react-speech-kit";
 import loginApi from "../api/loginApi";
 
 export default function Login() {
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    id: "",
+    password: "",
+  });
   const [who, setWho] = useState("");
 
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
       // 음성인식 결과가 value 상태값으로 할당됩니다.
-      who === "id" ? setId(result) : setPw(result);
+      who === "id" ? setInfo("id", result) : setInfo("password", result);
     },
   });
 
+  const setInfo = (type, value) => {
+    setUserInfo((user) => {
+      return { ...user, [type]: value };
+    });
+  };
   const navigate = useNavigate();
 
   const login = async () => {
-    const userInfo = {
-      id: id.replaceAll(" ", ""),
-      password: pw.replaceAll(" ", ""),
-    };
-
     const result = await loginApi(userInfo);
     console.log(result);
     console.log("userNo :" + localStorage.getItem("userNo"));
@@ -36,21 +38,40 @@ export default function Login() {
     setWho(e.target.name);
   };
 
+  const inputUserInfo = (text) => {
+    setUserInfo((user) => {
+      return { ...user, [text.target.name]: text.target.value };
+    });
+  };
+
+  const onMouse = (e) => {
+    whoClick(e);
+    listen();
+  };
+
   return (
     <div>
       <div>
-        <input placeholder="id" defaultValue={id}></input>
-        <button name="id" onMouseDown={whoClick} onMouseUp={listen}>
+        <input
+          name="id"
+          placeholder="id"
+          defaultValue={userInfo.id}
+          onChange={inputUserInfo}
+        ></input>
+        <button name="id" onMouseDown={onMouse} onMouseUp={stop}>
           🎤
         </button>
-        <button onMouseUp={stop}>멈춤</button>
       </div>
       <div>
-        <input placeholder="password" defaultValue={pw}></input>
-        <button name="pw" onMouseDown={whoClick} onMouseUp={listen}>
+        <input
+          name="password"
+          placeholder="password"
+          defaultValue={userInfo.password}
+          onChange={inputUserInfo}
+        ></input>
+        <button name="pw" onMouseDown={onMouse} onMouseUp={stop}>
           🎤
         </button>
-        <button onMouseUp={stop}>멈춤</button>
       </div>
       <div>
         <button onMouseUp={login}>로그인</button>
