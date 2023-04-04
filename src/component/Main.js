@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSpeechRecognition } from "react-speech-kit";
 
 export default function Main() {
   const [command, setCommand] = useState("");
+
+  const navigator = useNavigate();
+
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
       setCommand(result);
@@ -12,6 +16,11 @@ export default function Main() {
   const doCommand = () => {
     console.log(command);
   };
+
+  const moveToNews = () => {
+    navigator("/search");
+  };
+
   return (
     <div>
       <div>
@@ -27,7 +36,7 @@ export default function Main() {
         </button>
       </div>
       <div>
-        <button>뉴스</button>
+        <button onClick={moveToNews}>뉴스</button>
         <button>구글트렌드</button>
         <button>멜론차트</button>
         <button>인급동</button>

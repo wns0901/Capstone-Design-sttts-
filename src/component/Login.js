@@ -26,8 +26,6 @@ export default function Login() {
 
   const login = async () => {
     const result = await loginApi(userInfo);
-    console.log(result);
-    console.log("userNo :" + localStorage.getItem("userNo"));
     if (result) {
       alert("로그인 완료");
       navigate("/main");

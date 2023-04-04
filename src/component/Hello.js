@@ -13,7 +13,7 @@ export default function Hello() {
 
   return (
     <div>
-      <p>Hello</p>
+      <p>환영합니다</p>
       <button onClick={movePageToLogin}>로그인</button>
       <button onClick={movePageToRejister}>회원가입</button>
     </div>
