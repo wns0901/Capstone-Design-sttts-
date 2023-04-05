@@ -28,7 +28,7 @@ class GetData {
         });
       }
     });
-
+    console.log(news);
     return news;
   };
 }

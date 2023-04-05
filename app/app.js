@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res, next) => {
+app.get("*", (req, res, next) => {
   console.log(__dirname);
   res.sendFile(path.join(__dirname, "../build/index.html"));
   next();
