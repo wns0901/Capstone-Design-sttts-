@@ -1,24 +1,24 @@
 import { useState } from "react";
-import searchApi from "../api/searchApi";
 import { useEffect } from "react";
+import movieApi from "../api/movieApi";
 
-export default function Search() {
+export default function Netflix() {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await searchApi();
+      const result = await movieApi();
       setData(result);
     };
 
     fetchData();
   }, []);
 
-  const news = data.map((data) => (
+  const movies = data.map((data) => (
     <div key={data.id}>
-      <a href={data.link}>{data.title}</a>
-      <img src={data.img} alt="" />
+      <a>{data.title}</a>
+      <img src={data.image}alt="" />
     </div>
   ));
 
-  return <div>{news}</div>;
+  return <div>{movies}</div>;
 }

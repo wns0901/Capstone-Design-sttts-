@@ -1,4 +1,5 @@
 const Auth = require("../models/auth.service");
+const MovieData = require("../models/netflix");
 const GetData = require("../models/web");
 
 const process = {
@@ -17,6 +18,12 @@ const process = {
   getData: async (req, res) => {
     const getData = new GetData();
     const result = await getData.parsing(req.body.search);
+
+    return res.json(result);
+  },
+  movieData: async (req, res) => {
+    const movieData = new MovieData();
+    const result = await movieData.parsing(req.body);
 
     return res.json(result);
   },

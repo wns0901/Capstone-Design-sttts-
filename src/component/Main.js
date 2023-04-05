@@ -20,6 +20,10 @@ export default function Main() {
   const moveToNews = () => {
     navigator("/search");
   };
+  const moveToNetflix = () =>{
+    console.log('### start');
+    navigator("/netflix");
+  }
 
   return (
     <div>
@@ -39,7 +43,7 @@ export default function Main() {
         <button onClick={moveToNews}>뉴스</button>
         <button>구글트렌드</button>
         <button>멜론차트</button>
-        <button>인급동</button>
+        <button onClick={moveToNetflix}>인급동</button>
       </div>
       {listening && <div>음성인식 활성화 중</div>}
     </div>
