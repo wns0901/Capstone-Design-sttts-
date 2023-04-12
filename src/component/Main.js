@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSpeechRecognition } from "react-speech-kit";
+import {test} from './netflix';
 
 export default function Main() {
   const [command, setCommand] = useState("");
-
+  const axios = require('axios');
+  const cheerio = require("cheerio");
   const navigator = useNavigate();
 
   const { listen, listening, stop } = useSpeechRecognition({
@@ -43,7 +45,7 @@ export default function Main() {
         <button onClick={moveToNews}>뉴스</button>
         <button>구글트렌드</button>
         <button>멜론차트</button>
-        <button onClick={moveToNetflix}>인급동</button>
+        <button onClick={test}>인급동</button>
       </div>
       {listening && <div>음성인식 활성화 중</div>}
     </div>
