@@ -1,4 +1,5 @@
 const Auth = require("../models/auth.service");
+const Youtube = require("../models/youtube");
 const MovieData = require("../models/netflix");
 const GetData = require("../models/web");
 
@@ -26,6 +27,11 @@ const process = {
     const result = await movieData.parsing(req.body);
 
     return res.json(result);
+  },
+  getYoutubeDate: async (req, res) => {
+    const youtube = new Youtube();
+    console.log("확인");
+    await youtube.getyoutube();
   },
 };
 

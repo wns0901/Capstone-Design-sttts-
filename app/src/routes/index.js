@@ -7,5 +7,6 @@ router.post("/register", ctrl.register);
 router.post("/login", ctrl.login);
 router.post("/search", ctrl.getData);
 router.post("/netflix", ctrl.movieData);
+router.post("/youtube", ctrl.getYoutubeDate);
 
 module.exports = router;
