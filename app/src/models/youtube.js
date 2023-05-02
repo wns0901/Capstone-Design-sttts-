@@ -1,11 +1,11 @@
-const axios = require("axios");
+const axios = require('axios');
 
 class Youtube {
   async getyoutube() {
     const result = await axios.get(
-      "https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyAtV43B28nSVuUlC5kbbGXHleyVKTPRMVU"
+      'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=kr&key=AIzaSyAtV43B28nSVuUlC5kbbGXHleyVKTPRMVU'
     );
-    console.log(result.data.items[0].snippet);
+    return result.data.items;
   }
 }
 

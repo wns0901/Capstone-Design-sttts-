@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSpeechRecognition } from "react-speech-kit";
-import {test} from './netflix';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSpeechRecognition } from 'react-speech-kit';
+import { test } from './netflix';
+import Youtube from './Youtube';
 
 export default function Main() {
-  const [command, setCommand] = useState("");
+  const [command, setCommand] = useState('');
   const axios = require('axios');
-  const cheerio = require("cheerio");
+  const cheerio = require('cheerio');
   const navigator = useNavigate();
 
   const { listen, listening, stop } = useSpeechRecognition({
@@ -20,17 +21,23 @@ export default function Main() {
   };
 
   const moveToNews = () => {
-    navigator("/search");
+    navigator('/search');
   };
-  const moveToNetflix = () =>{
+  const moveToYoutube = () => {
+    navigator('/youtube');
+  };
+  const moveToNetflix = () => {
     console.log('### start');
-    navigator("/netflix");
-  }
+    navigator('/netflix');
+  };
 
   return (
     <div>
       <div>
-        <input placeholder="명령어를 입력해주세요" defaultValue={command} />
+        <input
+          placeholder="명령어를 입력해주세요"
+          defaultValue={command}
+        />
         <button
           onMouseDown={listen}
           onMouseUp={() => {
@@ -45,7 +52,8 @@ export default function Main() {
         <button onClick={moveToNews}>뉴스</button>
         <button>구글트렌드</button>
         <button>멜론차트</button>
-        <button onClick={test}>인급동</button>
+        <button onClick={test}>넷플릭스</button>
+        <button onClick={moveToYoutube}>인급동</button>
       </div>
       {listening && <div>음성인식 활성화 중</div>}
     </div>
