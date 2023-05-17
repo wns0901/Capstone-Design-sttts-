@@ -1,0 +1,88 @@
+* {
+  box-sizing: content-box;
+}
+
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.login__wrapper {
+  height: 100vh;
+  background-image: url(./background.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.login__title__wrapper {
+  width: 47%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginTitle {
+  font-size: 150px;
+  color: white;
+  font-weight: 600;
+}
+
+.login__action__wrapper {
+  width: 53%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__text__title {
+  width: 70%;
+  color: white;
+  text-align: left;
+  font-size: 17px;
+
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.login__text__box {
+  width: 65%;
+  height: 40px;
+  background: none;
+  border: 2px solid white;
+
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+
+  margin-bottom: 30px;
+}
+
+.signUp {
+  font-size: 13px;
+  color: white;
+  margin-bottom: 20px;
+
+  border-bottom: 1px solid white;
+}
+
+.signin {
+  width: 66%;
+  height: 70px;
+
+  background-color: white;
+  border: none;
+  font-size: 25px;
+  font-weight: 700;
+
+  cursor: pointer;
+}

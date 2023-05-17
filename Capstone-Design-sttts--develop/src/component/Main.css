@@ -1,0 +1,110 @@
+* {
+  box-sizing: content-box;
+}
+
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.main__wrapper {
+  height: 100vh;
+  background-image: url(./background.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.wrapper__chat {
+  width: 35%;
+}
+
+.wrapper__action {
+  width: 65%;
+}
+
+.wrapper__action__box {
+  height: 75%;
+}
+
+.action__search__box {
+  width: 70%;
+  height: 100%;
+}
+
+.search_title {
+  width: 100%;
+  height: 27%;
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 5px;
+}
+
+.mainTitle {
+  font-size: 55px;
+  color: white;
+  font-weight: 1000;
+  text-align: left;
+}
+
+.search_box {
+  width: 100%;
+  height: 10%;
+}
+
+.searchBox {
+  width: 85%;
+  height: 90%;
+  background: none;
+  border: 2px solid white;
+  margin-right: 1%;
+
+  font-size: 20px;
+  color: white;
+  padding: 5px;
+}
+
+.searchBtn {
+  width: 10%;
+  height: 100%;
+  padding: 2px;
+
+  background: none;
+  border: 2px solid white;
+
+  cursor: pointer;
+}
+
+.btn_box {
+  position: relative;
+  top: 12px;
+  width: 100%;
+  height: 30%;
+}
+
+.mainBtn {
+  width: 45%;
+  height: 95%;
+  margin: 5px;
+
+  background: none;
+  border: 2px solid white;
+  border-radius: 15px;
+
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.wrapper__action__history {
+  height: 25%;
+}
