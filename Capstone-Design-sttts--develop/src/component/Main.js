@@ -28,49 +28,53 @@ export default function Main() {
 
   return (
     <div className="main__wrapper">
-      <div className="wrapper__chat"></div>
-      <div className="wrapper__action">
+      <div className="main__wrapper__header">
+        <div className="header__title">STTTS</div>
+        <div className="my__page">
+          <div className="name">ooo님</div>
+          <button className="logout">로그아웃</button>
+        </div>
+      </div>
+      <div className="main__wrapper__body">
+        <div className="wrapper__chat__box"></div>
         <div className="wrapper__action__box">
           <div className="action__search__box">
-            <div className="search_title">
-              <span className="mainTitle">당신이 원하는 정보를</span>
-              <span className="mainTitle">찾아보세요</span>
-            </div>
-            <div className="search_box">
-              <input
-                className="searchBox"
-                placeholder="명령어를 입력해주세요"
-                defaultValue={command}
-              />
-              <button
-                className="searchBtn"
-                onMouseDown={listen}
-                onMouseUp={() => {
-                  stop();
-                  doCommand();
-                }}
-              >
-                🎤
-              </button>
-            </div>
-            <div className="btn_box">
-              <button className="mainBtn" onClick={moveToNews}>
-                뉴스
-              </button>
-              <button className="mainBtn">구글트렌드</button>
-            </div>
-            <div className="btn_box">
-              <button className="mainBtn">멜론차트</button>
-              <button className="mainBtn" onClick={moveToNetflix}>
-                인급동
-              </button>
-            </div>
-            {listening && <div>음성인식 활성화 중</div>}
+            <input
+              className="search__box__txt"
+              placeholder="명령어를 입력해주세요"
+              defaultValue={command}
+            />
+            <button
+              className="search__box__btn"
+              onMouseDown={listen}
+              onMouseUp={() => {
+                stop();
+                doCommand();
+              }}
+            >
+              🎤
+            </button>
           </div>
-          <div className="action__trend__box"></div>
+          <div className="action__message__txt">원하는 정보를 찾아보세요 !</div>
+          <div className="action__btn__wrapper">
+            <button className="mainBtn" onClick={moveToNews}>
+              뉴스
+            </button>
+            <button className="mainBtn">증권</button>
+            <button className="mainBtn">음악</button>
+            <button className="mainBtn" onClick={moveToNetflix}>
+              영화&TV
+            </button>
+          </div>
+          {listening && <div>음성인식 활성화 중</div>}
+          <div className="action__history__box">
+            <div className="history__title">이전 검색어</div>
+            <div className="history__keyword"></div>
+          </div>
         </div>
-        <div className="wrapper__action__history"></div>
+        <div className="wrapper__trend__box"></div>
       </div>
+      <div className="main__wrapper__footer"></div>
     </div>
   );
 }
