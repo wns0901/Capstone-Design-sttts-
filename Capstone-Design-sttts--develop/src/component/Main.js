@@ -55,7 +55,10 @@ export default function Main() {
               🎤
             </button>
           </div>
-          <div className="action__message__txt">원하는 정보를 찾아보세요 !</div>
+          <div className="action__message__txt">
+            <span id="title">STTTS</span>
+            <span id="message">원하는 정보를 찾아보세요 !</span>
+          </div>
           <div className="action__btn__wrapper">
             <button className="mainBtn" onClick={moveToNews}>
               뉴스
@@ -63,7 +66,7 @@ export default function Main() {
             <button className="mainBtn">증권</button>
             <button className="mainBtn">음악</button>
             <button className="mainBtn" onClick={moveToNetflix}>
-              영화&TV
+              TV
             </button>
           </div>
           {listening && <div>음성인식 활성화 중</div>}
