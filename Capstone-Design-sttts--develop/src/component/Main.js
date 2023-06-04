@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSpeechRecognition } from "react-speech-kit";
-import "./Main.css";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSpeechRecognition } from 'react-speech-kit';
+import './Main.css';
+import Search from './search';
+import Appw from './com';
 
 export default function Main() {
-  const [command, setCommand] = useState("");
+  const [command, setCommand] = useState('');
 
   const navigator = useNavigate();
 
@@ -19,11 +21,11 @@ export default function Main() {
   };
 
   const moveToNews = () => {
-    navigator("/search");
+    navigator('/search');
   };
   const moveToNetflix = () => {
-    console.log("### start");
-    navigator("/netflix");
+    console.log('### start');
+    navigator('/netflix');
   };
 
   return (
@@ -60,19 +62,27 @@ export default function Main() {
             <span id="message">원하는 정보를 찾아보세요 !</span>
           </div>
           <div className="action__btn__wrapper">
-            <button className="mainBtn" onClick={moveToNews}>
+            <button
+              className="mainBtn"
+              onClick={moveToNews}
+            >
               뉴스
             </button>
             <button className="mainBtn">증권</button>
             <button className="mainBtn">음악</button>
-            <button className="mainBtn" onClick={moveToNetflix}>
+            <button
+              className="mainBtn"
+              onClick={moveToNetflix}
+            >
               TV
             </button>
           </div>
           {listening && <div>음성인식 활성화 중</div>}
           <div className="action__history__box">
             <div className="history__title">이전 검색어</div>
-            <div className="history__keyword"></div>
+            <div className="history__keyword">
+              <Appw />
+            </div>
           </div>
         </div>
         <div className="wrapper__trend__box"></div>
