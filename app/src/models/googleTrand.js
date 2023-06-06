@@ -18,19 +18,25 @@ class GoogleTrand {
 
     $trand.each((i, node) => {
       const discription = $(node).children('ht\\:news_item');
-      trand.push({
-        id: i + 1,
-        title: $(node).children('title').text(),
-        traffic: $(node).children('ht\\:approx_traffic').text(),
-        pubData: $(node).children('pubDate').text(),
-        pubData: $(node).children('pubDate').text(),
-        discription: {
-          title: $(discription['0']).children('ht\\:news_item_title').text(),
-          url: $(discription['0']).children('ht\\:news_item_url').text(),
-        },
-      });
+      if (i < 15) {
+        trand.push({
+          id: i + 1,
+          title: $(node).children('title').text(),
+          traffic: $(node).children('ht\\:approx_traffic').text(),
+          pubData: $(node).children('pubDate').text(),
+          pubData: $(node).children('pubDate').text(),
+          discription: {
+            title: $(discription['0'])
+              .children('ht\\:news_item_title')
+              .text()
+              .replaceAll(`&#39;`, `'`)
+              .replaceAll(`&quot;`, `"`),
+            url: $(discription['0']).children('ht\\:news_item_url').text(),
+          },
+        });
+      }
     });
-    console.log(trand);
+
     return trand;
   };
 }

@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useSpeechRecognition } from 'react-speech-kit';
 import './Main.css';
 import Search from './search';
-import Appw from './com';
 import { test } from './netflix';
 import Youtube from './Youtube';
+import ScrollBox from './box';
+import GoogleTrands from './googleTrends';
 
 export default function Main() {
   const [command, setCommand] = useState('');
+  const [target, setTarget] = useState('');
   const axios = require('axios');
   const cheerio = require('cheerio');
   const navigator = useNavigate();
@@ -23,15 +25,24 @@ export default function Main() {
     console.log(command);
   };
 
-  const moveToNews = () => {
-    navigator('/search');
+  const changeToNews = () => {
+    setTarget('뉴스');
   };
-  const moveToYoutube = () => {
-    navigator('/youtube');
+
+  const changeToYoutube = () => {
+    setTarget('유튜브');
   };
+
   const moveToNetflix = () => {
     console.log('### start');
     navigator('/netflix');
+  };
+
+  const changeToJusic = () => {
+    setTarget('증권');
+  };
+  const changeToMusic = () => {
+    setTarget('뮤직');
   };
 
   return (
@@ -70,28 +81,43 @@ export default function Main() {
           <div className="action__btn__wrapper">
             <button
               className="mainBtn"
-              onClick={moveToNews}
+              onClick={changeToNews}
             >
               뉴스
             </button>
-            <button className="mainBtn">증권</button>
-            <button className="mainBtn">음악</button>
             <button
               className="mainBtn"
-              onClick={moveToNetflix}
+              onClick={changeToJusic}
             >
-              TV
+              증권
+            </button>
+            <button
+              className="mainBtn"
+              onClick={changeToMusic}
+            >
+              음악
+            </button>
+            <button
+              className="mainBtn"
+              onClick={changeToYoutube}
+            >
+              유튜브
             </button>
           </div>
           {listening && <div>음성인식 활성화 중</div>}
           <div className="action__history__box">
-            <div className="history__title">이전 검색어</div>
+            <div className="history__title">
+              {target ? target : '선택해주세요'}
+            </div>
             <div className="history__keyword">
-              <Appw />
+              <ScrollBox target={target} />
             </div>
           </div>
         </div>
-        <div className="wrapper__trend__box"></div>
+        <div className="wrapper__trend__box">
+          {/* <ScrollBox target={'트렌드'} /> */}
+          <GoogleTrands />
+        </div>
       </div>
       <div className="main__wrapper__footer"></div>
     </div>

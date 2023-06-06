@@ -7,15 +7,14 @@ import Login from './component/Login';
 import Search from './component/search';
 import Netflix from './component/netflixPage';
 import Youtube from './component/Youtube';
+import Melon from './component/Melon';
+import Jusic from './component/Jusic';
+import GoogleTrands from './component/googleTrends';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/"
-          element={<Hello />}
-        />
         <Route
           path="/login"
           element={<Login />}
@@ -29,16 +28,12 @@ function App() {
           element={<Main />}
         />
         <Route
-          path="/search"
-          element={<Search />}
-        />
-        <Route
           path="/netflix"
           element={<Netflix />}
         />
         <Route
-          path="/youtube"
-          element={<Youtube />}
+          path="/trends"
+          element={<GoogleTrands />}
         />
       </Routes>
     </div>

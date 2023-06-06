@@ -3,6 +3,8 @@ const Youtube = require('../models/youtube');
 const MovieData = require('../models/netflix');
 const GetData = require('../models/web');
 const GoogleTrand = require('../models/googleTrand');
+const Jusick = require('../models/naverJusik');
+const Melon = require('../models/melonv2');
 
 const process = {
   register: async (req, res) => {
@@ -39,6 +41,18 @@ const process = {
   getGoogleTrands: async (req, res) => {
     const trand = new GoogleTrand();
     const result = await trand.parsing();
+    return res.json(result);
+  },
+
+  getJusic: async (req, res) => {
+    const jusic = new Jusick();
+    const result = await jusic.getJusick();
+    return res.json(result);
+  },
+
+  getMelon: async (req, res) => {
+    const melon = new Melon();
+    const result = await melon.getMelonChart();
     return res.json(result);
   },
 };
