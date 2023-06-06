@@ -1,6 +1,8 @@
-const Auth = require("../models/auth.service");
-const MovieData = require("../models/netflix");
-const GetData = require("../models/web");
+const Auth = require('../models/auth.service');
+const Youtube = require('../models/youtube');
+const MovieData = require('../models/netflix');
+const GetData = require('../models/web');
+const GoogleTrand = require('../models/googleTrand');
 
 const process = {
   register: async (req, res) => {
@@ -25,6 +27,18 @@ const process = {
     const movieData = new MovieData();
     const result = await movieData.parsing(req.body);
 
+    return res.json(result);
+  },
+  getYoutubeDate: async (req, res) => {
+    const youtube = new Youtube();
+    const result = await youtube.getyoutube();
+
+    return res.json(result);
+  },
+
+  getGoogleTrands: async (req, res) => {
+    const trand = new GoogleTrand();
+    const result = await trand.parsing();
     return res.json(result);
   },
 };

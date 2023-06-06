@@ -4,10 +4,13 @@ import { useSpeechRecognition } from 'react-speech-kit';
 import './Main.css';
 import Search from './search';
 import Appw from './com';
+import { test } from './netflix';
+import Youtube from './Youtube';
 
 export default function Main() {
   const [command, setCommand] = useState('');
-
+  const axios = require('axios');
+  const cheerio = require('cheerio');
   const navigator = useNavigate();
 
   const { listen, listening, stop } = useSpeechRecognition({
@@ -22,6 +25,9 @@ export default function Main() {
 
   const moveToNews = () => {
     navigator('/search');
+  };
+  const moveToYoutube = () => {
+    navigator('/youtube');
   };
   const moveToNetflix = () => {
     console.log('### start');
