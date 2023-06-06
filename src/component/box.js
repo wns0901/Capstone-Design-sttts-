@@ -15,15 +15,16 @@ class ScrollBox extends Component {
     const style = {
       // border: '1px solid black',
       height: '410px',
-      width: '580px',
+      width: '97%',
       overflow: 'auto',
+      margin: '5px',
       position: 'relative',
       top: '20px',
     };
 
     const innerStyle = {
       width: '100%',
-      height: '650px',
+      // height: '650px',
     };
     return (
       <div
