@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import youtubeDataApi from '../api/youtubeDataApi';
-import { useState } from 'react';
-import './VideoList.css';
+import { useEffect } from "react";
+import youtubeDataApi from "../api/youtubeDataApi";
+import { useState } from "react";
+import "./VideoList.css";
 
 export default function Youtube() {
   const [data, setData] = useState([]);
@@ -15,11 +15,12 @@ export default function Youtube() {
   }, []);
 
   const youtube = data.map((data, index) => (
-    <li
-      id="video-list"
-      key={index}
-    >
-      <a href={`https://www.youtube.com/watch?v=${data.id}`}>
+    <li id="video-list" key={index}>
+      <a
+        href={`https://www.youtube.com/watch?v=${data.id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           className="video-img"
           src={data.snippet.thumbnails.medium.url}

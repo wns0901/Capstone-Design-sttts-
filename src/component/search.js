@@ -15,7 +15,9 @@ export default function Search() {
 
   const news = data.map((data) => (
     <div key={data.id}>
-      <a href={data.link}>{data.title}</a>
+      <a href={data.link} target="_blank" rel="noopener noreferrer">
+        {data.title}
+      </a>
       <img src={data.img} alt="" />
     </div>
   ));

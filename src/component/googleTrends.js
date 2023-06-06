@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import googleTrendsDataApi from '../api/googleTrendsApi';
+import { useEffect, useState } from "react";
+import googleTrendsDataApi from "../api/googleTrendsApi";
 
 export default function GoogleTrands() {
   const [data, setData] = useState([]);
@@ -25,16 +25,18 @@ export default function GoogleTrands() {
           <a
             href={data.discription.url}
             style={{
-              overflow: 'hidden',
-              'text-overflow': 'ellipsis',
-              'white-space': 'normal',
-              'line-height': '1.5',
-              'word-wrap': 'break-word',
-              'text-align': 'left',
-              display: '-webkit-box',
-              '-webkit-line-clamp': '1',
-              '-webkit-box-orient': 'vertical',
+              overflow: "hidden",
+              "text-overflow": "ellipsis",
+              "white-space": "normal",
+              "line-height": "1.5",
+              "word-wrap": "break-word",
+              "text-align": "left",
+              display: "-webkit-box",
+              "-webkit-line-clamp": "1",
+              "-webkit-box-orient": "vertical",
             }}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             {data.discription.title}
           </a>
@@ -48,7 +50,7 @@ export default function GoogleTrands() {
   return (
     <div
       style={{
-        marginTop: '10px',
+        marginTop: "10px",
       }}
     >
       <table>{googleTrands}</table>
