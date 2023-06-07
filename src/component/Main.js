@@ -7,6 +7,97 @@ import { test } from './netflix';
 import Youtube from './Youtube';
 import ScrollBox from './box';
 import GoogleTrands from './googleTrends';
+import {MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from "@chatscope/chat-ui-kit-react";
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+
+const API_KEY = process.env.REACT_APP_API_KEY;
+
+const ChatbotPage = () =>{
+
+const [typing, setTyping] = useState(false)
+  const [messages , setMessages] = useState([
+    {
+      message: "안녕하세요 무엇을 도와드릴까요? ",
+      sender: "ChatGPT"
+    }
+  ]);
+
+  const handleSend = async (message) => {
+    const newMessage = {
+      message: message,
+      sender: "user",
+      direction: "outgoing"
+    }
+
+    const newMessages = [...messages, newMessage];
+
+    setMessages(newMessages);
+
+    setTyping(true);
+    await processMesaageToChatGPT(newMessages);
+  }
+
+  async function processMesaageToChatGPT(chatMessages){
+    let apiMessages = chatMessages.map((value)=> {
+      let role ="";
+      if(value.sender == "ChatGPT"){
+        role = "assistant"
+      } else{
+        role ="user"
+      } return {role: role, content: value.message}
+    });
+    const systemMessage = {
+      role : "system",
+      content: "test"
+    }
+    const apiRequestBody = {
+      prompt: chatMessages.map((message) => message.message).join("\n") + "\n",
+      max_tokens: 1024,
+      temperature:0.7,
+      n:1,
+      stop:".",
+
+    }
+    await fetch("https://api.openai.com/v1/engines/text-davinci-003/completions", {
+      method : "POST",
+      headers: {
+        "Authorization" : "Bearer " + API_KEY,
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify(apiRequestBody),
+    }).then((data)=>{
+      return data.json();
+    }).then((data)=>{
+      console.log(data);
+      setMessages(
+        [...chatMessages, {
+          message: data.choices[0].text,
+          sender:"ChatGPT"
+        }]
+      );
+      setTyping(false);
+    });
+  }
+  return (
+    <div>
+      <div style={{position: "relative", height: "885px", width: "28vw"}}>
+        <MainContainer>
+          <ChatContainer>
+            <MessageList
+              typingIndicator ={typing ? <TypingIndicator content="ChatGPT is typing"/>: null}>
+              {messages.map((message, i)=> {
+                return <Message key = {i} model= {message}/>
+              })}
+            </MessageList>
+            <MessageInput placeholder="type message here" onSend={handleSend} />
+          </ChatContainer>
+        </MainContainer>
+      </div>
+    </div>
+  );
+}
+
+
 
 export default function Main() {
   const [command, setCommand] = useState('');
@@ -55,7 +146,9 @@ export default function Main() {
         </div>
       </div>
       <div className="main__wrapper__body">
-        <div className="wrapper__chat__box"></div>
+        <div className="wrapper__chat__box">
+        <ChatbotPage/>
+        </div>
         <div className="wrapper__action__box">
           <div className="action__search__box">
             <input
