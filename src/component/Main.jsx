@@ -13,6 +13,15 @@ import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const ChatbotPage = () =>{
+  const [command, setCommand] = useState('');
+  const { listen, listening, stop } = useSpeechRecognition({
+    onResult: (result) => {
+      setCommand(result);
+    },
+  });
+  const doCommand = () => {
+    console.log(command);
+  };
 
 const [typing, setTyping] = useState(false)
   const [messages , setMessages] = useState([
@@ -83,20 +92,43 @@ const [typing, setTyping] = useState(false)
       <div style={{position: "relative", height: "885px", width: "28vw"}}>
         <MainContainer>
           <ChatContainer>
-            <MessageList
-              typingIndicator ={typing ? <TypingIndicator content="ChatGPT is typing"/>: null}>
+            <MessageList 
+              typingIndicator ={typing ? <TypingIndicator content="ChatGPT is typing" />: null} 
+              style={{
+                fontSize : "20px",
+              }}
+              >
+                
               {messages.map((message, i)=> {
-                return <Message key = {i} model= {message}/>
-              })}
+                return (
+                    <Message key = {i} model= {message}  />
+                )
+              })} 
             </MessageList>
             <MessageInput placeholder="type message here" onSend={handleSend} />
           </ChatContainer>
+          {
+           <button
+              style={{
+                position: "absolute",
+                zIndex: 9999,
+                top: "840px",
+                left: "2px"
+              }}
+              className="search__box__btn"
+              onMouseDown={listen}
+              onMouseUp={() => {
+                stop();
+                doCommand();
+              }}
+            >
+            🎤
+            </button> }
         </MainContainer>
       </div>
     </div>
   );
 }
-
 
 
 export default function Main() {
@@ -216,3 +248,4 @@ export default function Main() {
     </div>
   );
 }
+
