@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import googleTrendsDataApi from "../api/googleTrendsApi";
+import { COLLECTION_FORMATS } from "openai/dist/base";
 
 export default function GoogleTrands() {
   const [data, setData] = useState([]);
@@ -14,46 +15,61 @@ export default function GoogleTrands() {
 
   const googleTrands = data.map((data) => (
     <tbody key={data.id}>
-      <tr>
-        <td>{data.id}</td> {/* 순위 */}
-        <td>{data.title}</td>
-        <td>{data.traffic}</td>
-      </tr>
-      <tr>
-        <td />
-        <td>
+      <tr
+        style={{
+          boxShadow: "1px 1px 3px 1px #aaaaaa",
+          borderRadius: "10px",
+        }}
+      >
+        <td style={{ textAlign: "left", padding: "17px" }}>{data.id}위</td>
+        <td /> <td /> <td /> <td /> <td /> <td />
+        <td style={{ textAlign: "center" }}>
           <a
-            href={data.discription.url}
             style={{
-              overflow: "hidden",
-              "text-overflow": "ellipsis",
-              "white-space": "normal",
-              "line-height": "1.5",
-              "word-wrap": "break-word",
-              "text-align": "left",
-              display: "-webkit-box",
-              "-webkit-line-clamp": "1",
-              "-webkit-box-orient": "vertical",
+              textDecoration: "none",
+              color: "#313a3d",
             }}
+            href={data.discription.url}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {data.discription.title}
+            {data.title}
           </a>
         </td>
-        <td>검색 횟수</td>
+        <td /> <td /> <td /> <td /> <td /> <td /> <td /> <td />
+        <td style={{ textAlign: "right" }}>검색횟수: </td>
+        <td /> <td />
+        <td
+          style={{
+            textAlign: "right",
+            color: "#EC3340",
+            paddingRight: "10px",
+          }}
+        >
+          {data.traffic}
+        </td>
       </tr>
-      <tr height={5} />
+      <tr height={20} />
     </tbody>
   ));
 
   return (
     <div
       style={{
-        marginTop: "10px",
+        marginTop: "23px",
+        marginLeft: "10px",
+        marginRight: "10px",
+        fontSize: "1.2em",
       }}
     >
-      <table>{googleTrands}</table>
+      <table
+        style={{
+          display: "inline-block",
+          height: "885px",
+        }}
+      >
+        {googleTrands}
+      </table>
     </div>
   );
 }
