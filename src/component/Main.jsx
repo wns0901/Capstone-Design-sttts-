@@ -32,6 +32,7 @@ const [typing, setTyping] = useState(false)
   ]);
 
   const handleSend = async (message) => {
+
     const newMessage = {
       message: message,
       sender: "user",
@@ -43,7 +44,11 @@ const [typing, setTyping] = useState(false)
     setMessages(newMessages);
 
     setTyping(true);
+    if(message == command){
+      setCommand('');
+    }
     await processMesaageToChatGPT(newMessages);
+    
   }
 
   async function processMesaageToChatGPT(chatMessages){
@@ -92,6 +97,9 @@ const [typing, setTyping] = useState(false)
       <div style={{position: "relative", height: "885px", width: "28vw"}}>
         <MainContainer>
           <ChatContainer>
+          {listening && <div style={{
+            zIndex : 9998,
+          }}>음성인식 활성화 중</div>}
             <MessageList 
               typingIndicator ={typing ? <TypingIndicator content="ChatGPT is typing" />: null} 
               style={{
@@ -105,8 +113,12 @@ const [typing, setTyping] = useState(false)
                 )
               })} 
             </MessageList>
-            <MessageInput placeholder="type message here" onSend={handleSend} />
+            <MessageInput  placeholder="type message here" onSend={handleSend} 
+             value={command}
+             onChange={setCommand}
+           />
           </ChatContainer>
+          
           {
            <button
               style={{
