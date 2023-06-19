@@ -223,9 +223,7 @@ export default function Main() {
               <div className="trend__header__right">▼</div>
             </div>
             {/* <ScrollBox target={'트렌드'} /> */}
-            <div className="trend__body">
-              <GoogleTrands />
-            </div>
+            <GoogleTrands />
           </div>
         </div>
       </div>

@@ -15,32 +15,22 @@ export default function GoogleTrands() {
   }, []);
 
   const googleTrands = data.map((data) => (
-    <tbody id="trend__tbody" key={data.id}>
-      <tr className="trend__keyword__box">
-        <td id="trend__rank">{data.id}위</td>
-        <td /> <td /> <td /> <td /> <td /> <td />
-        <td id="trend__title">
-          <a
-            id="trend_title"
-            href={data.discription.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {data.title}
-          </a>
-        </td>
-        <td /> <td /> <td /> <td /> <td />
-        <td id="trend__count__title">검색수 </td>
-        <td /> <td /> <td />
-        <td id="trend__count">{data.traffic}</td>
-      </tr>
-      <tr height={20} />
-    </tbody>
+    <div className="trend__keyword__box" key={data.id}>
+      <div id="trend__rank">{data.id}위</div>
+      <div id="trend__title">{data.title}</div>
+      <div id="trend__count">{data.traffic}</div>
+      <div id="trend__link">
+        <a
+          id="trend_title"
+          href={data.discription.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GO
+        </a>
+      </div>
+    </div>
   ));
 
-  return (
-    <div className="trend__wrapper">
-      <table className="trend__box__wrapper">{googleTrands}</table>
-    </div>
-  );
+  return <div className="trend__wrapper">{googleTrands}</div>;
 }

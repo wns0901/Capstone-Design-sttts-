@@ -25,12 +25,12 @@ export default function Melon() {
           rowSpan={2}
           align="center"
           style={{
-            fontSize: "1.2em",
+            fontSize: "1.5em",
           }}
         >
           {data.rank}
         </td>
-        <td rowSpan={2} align="center">
+        <td width={90} rowSpan={2} align="center">
           <img
             src={data.imgSrc}
             style={{
@@ -42,7 +42,8 @@ export default function Melon() {
           />
         </td>
         <td
-          align="left"
+          width={530}
+          align="center"
           style={{
             color: "#3d4346",
           }}
@@ -52,7 +53,7 @@ export default function Melon() {
       </tr>
       <tr>
         <td
-          align="left"
+          align="center"
           style={{
             color: "#26292b",
             fontSize: "1.2em",

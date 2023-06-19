@@ -1,0 +1,21 @@
+#ju__box__wrapper {
+  box-shadow: -1px -1px #9dadbd, 1px 1px 0 #9dadbd;
+  background-color: #ffffff;
+}
+
+#ju__table__wrapper {
+  background-color: #9dadbd;
+}
+
+#ju__header {
+  background-color: #9dadbd;
+  border-spacing: 0px;
+  border-style: none;
+  padding: 0px;
+
+  font-size: 1.2em;
+
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+}

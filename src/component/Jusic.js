@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import jusicDataApi from "../api/jusicApi";
-
+import "./jusic.css";
 export default function Jusic() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -13,35 +13,31 @@ export default function Jusic() {
   }, []);
 
   const jusic = data.map((data, index) => (
-    <tr
-      key={index}
-      style={{
-        boxShadow: "1px 0px 3px 1px #aaaaaa",
-        borderRadius: "10px",
-      }}
-    >
-      <td>{data.name}</td>
-      <td>{data.price}</td>
-      <td>
-        {data.upDown ? (
-          <img
-            src={data.upDown}
-            style={{
-              width: "7px",
-              height: "6px",
-              border: 0,
-              borderRadius: "0%",
-            }}
-          />
-        ) : null}
-        {data.diff}
-      </td>
-      <td>{data.volume}</td>
-    </tr>
+    <tbody id="ju__box__wrapper" key={index}>
+      <tr id="ju__box__wrapper">
+        <td height={50}>{data.name}</td>
+        <td>{data.price}</td>
+        <td>
+          {data.upDown ? (
+            <img
+              src={data.upDown}
+              style={{
+                width: "7px",
+                height: "6px",
+                border: 0,
+                borderRadius: "0%",
+              }}
+            />
+          ) : null}
+          {data.diff}
+        </td>
+        <td>{data.volume}</td>
+      </tr>
+    </tbody>
   ));
 
   return (
-    <li
+    <div
       style={{
         display: "flex",
         flexDirection: "column",
@@ -50,22 +46,19 @@ export default function Jusic() {
         fontSize: "1.3em",
       }}
     >
-      <table>
+      <table id="ju__table__wrapper">
         <thead>
-          <tr
-            style={{
-              fontSize: "1.2em",
-            }}
-          >
-            <th width={200}>종목명</th>
+          <tr id="ju__header">
+            <th width={200} height={50}>
+              종목명
+            </th>
             <th width={200}>현재가</th>
             <th width={200}>전일비</th>
             <th width={200}>거래량</th>
           </tr>
-          <tr /> <tr /> <tr />
         </thead>
-        <tbody>{jusic}</tbody>
+        {jusic}
       </table>
-    </li>
+    </div>
   );
 }
