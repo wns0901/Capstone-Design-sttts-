@@ -94,7 +94,7 @@ const ChatbotPage = () => {
   }
   return (
     <div>
-      <div className="wrapper__chat__box">
+      <div className="chat__box__body">
         <MainContainer>
           <ChatContainer>
             <MessageList
@@ -155,68 +155,78 @@ export default function Main() {
   };
 
   return (
-    <div className="main__wrapper">
-      <div className="main__wrapper__header">
-        <div className="header__title">STTTS</div>
-        <div className="my__page">
-          <div className="name">ooo님</div>
-          <button className="logout">로그아웃</button>
+    <div className="mainClass">
+      <div className="main__wrapper">
+        <div className="main__wrapper__header">
+          <div className="header__title">STTTS</div>
+          <div className="my__page">
+            <div className="name">ooo님</div>
+            <button className="logout">로그아웃</button>
+          </div>
         </div>
-      </div>
-      <div className="main__wrapper__body">
-        <div className="wrapper__chat__box">
-          <ChatbotPage />
-        </div>
-        <div className="wrapper__action__box">
-          <div className="action__search__box">
-            <input
-              className="search__box__txt"
-              placeholder="명령어를 입력해주세요"
-              defaultValue={command}
-            />
-            <button
-              className="search__box__btn"
-              onMouseDown={listen}
-              onMouseUp={() => {
-                stop();
-                doCommand();
-              }}
-            >
-              🎤
-            </button>
-          </div>
-          <div className="action__message__txt">
-            <span id="title">STTTS</span>
-            <span id="message">원하는 정보를 찾아보세요 !</span>
-          </div>
-          <div className="action__btn__wrapper">
-            <button className="mainBtn" onClick={changeToNews}>
-              뉴스
-            </button>
-            <button className="mainBtn" onClick={changeToJusic}>
-              증권
-            </button>
-            <button className="mainBtn" onClick={changeToMusic}>
-              음악
-            </button>
-            <button className="mainBtn" onClick={changeToYoutube}>
-              유튜브
-            </button>
-          </div>
-          {listening && <div>음성인식 활성화 중</div>}
-          <div className="action__history__box">
-            <div className="history__title">
-              {target ? target : "선택해주세요"}
-            </div>
-            <div className="history__keyword">
-              <ScrollBox target={target} />
+        <div className="main__wrapper__body">
+          <div className="wrapper__chat__box">
+            <div className="chat__box__header">챗봇 스트트</div>
+            <div className="chat__box__body">
+              <ChatbotPage />
             </div>
           </div>
-        </div>
-        <div className="wrapper__trend__box">
-          <div className="trend__title">🔍 실시간검색어 🔍</div>
-          {/* <ScrollBox target={'트렌드'} /> */}
-          <GoogleTrands />
+          <div className="wrapper__action__box">
+            {/* <div className="action__search__box">
+              <input
+                className="search__box__txt"
+                placeholder="명령어를 입력해주세요"
+                defaultValue={command}
+              />
+              <button
+                className="search__box__btn"
+                onMouseDown={listen}
+                onMouseUp={() => {
+                  stop();
+                  doCommand();
+                }}
+              >
+                🎤
+              </button>
+            </div> */}
+            <div className="action__ad__box">
+              <span id="action__ad__title">STTTS</span>
+              <span id="action__ad__message">원하는 정보를 찾아보세요 !</span>
+            </div>
+            <div className="action__btn__wrapper">
+              <button className="main__btn__news" onClick={changeToNews}>
+                <span class="main__btn__text">NEWS</span>
+              </button>
+              <button className="main__btn__ju" onClick={changeToJusic}>
+                <span class="main__btn__text">STOCKS</span>
+              </button>
+              <button className="main__btn__music" onClick={changeToMusic}>
+                <span class="main__btn__text">MUSIC</span>
+              </button>
+              <button className="main__btn__yt" onClick={changeToYoutube}>
+                <span class="main__btn__text">TV</span>
+              </button>
+            </div>
+            {/* {listening && <div>음성인식 활성화 중</div>} */}
+            <div className="action__page__box">
+              {/* <div className="page__title">
+                {target ? target : "선택해주세요"}
+              </div> */}
+              <div className="page__area">
+                <ScrollBox target={target} />
+              </div>
+            </div>
+          </div>
+          <div className="wrapper__trend__box">
+            <div className="trend__header">
+              <div className="trend__header__left">실시간급상승</div>
+              <div className="trend__header__right">▼</div>
+            </div>
+            {/* <ScrollBox target={'트렌드'} /> */}
+            <div className="trend__body">
+              <GoogleTrands />
+            </div>
+          </div>
         </div>
       </div>
     </div>

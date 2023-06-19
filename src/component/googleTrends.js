@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import googleTrendsDataApi from "../api/googleTrendsApi";
 import { COLLECTION_FORMATS } from "openai/dist/base";
+import "./googleTrend.css";
 
 export default function GoogleTrands() {
   const [data, setData] = useState([]);
@@ -14,21 +15,13 @@ export default function GoogleTrands() {
   }, []);
 
   const googleTrands = data.map((data) => (
-    <tbody key={data.id}>
-      <tr
-        style={{
-          boxShadow: "1px 1px 3px 1px #aaaaaa",
-          borderRadius: "10px",
-        }}
-      >
-        <td style={{ textAlign: "left", padding: "17px" }}>{data.id}위</td>
+    <tbody id="trend__tbody" key={data.id}>
+      <tr className="trend__keyword__box">
+        <td id="trend__rank">{data.id}위</td>
         <td /> <td /> <td /> <td /> <td /> <td />
-        <td style={{ textAlign: "center" }}>
+        <td id="trend__title">
           <a
-            style={{
-              textDecoration: "none",
-              color: "#313a3d",
-            }}
+            id="trend_title"
             href={data.discription.url}
             target="_blank"
             rel="noopener noreferrer"
@@ -36,40 +29,18 @@ export default function GoogleTrands() {
             {data.title}
           </a>
         </td>
-        <td /> <td /> <td /> <td /> <td /> <td /> <td /> <td />
-        <td style={{ textAlign: "right" }}>검색횟수: </td>
-        <td /> <td />
-        <td
-          style={{
-            textAlign: "right",
-            color: "#EC3340",
-            paddingRight: "10px",
-          }}
-        >
-          {data.traffic}
-        </td>
+        <td /> <td /> <td /> <td /> <td />
+        <td id="trend__count__title">검색수 </td>
+        <td /> <td /> <td />
+        <td id="trend__count">{data.traffic}</td>
       </tr>
       <tr height={20} />
     </tbody>
   ));
 
   return (
-    <div
-      style={{
-        marginTop: "23px",
-        marginLeft: "10px",
-        marginRight: "10px",
-        fontSize: "1.2em",
-      }}
-    >
-      <table
-        style={{
-          display: "inline-block",
-          height: "885px",
-        }}
-      >
-        {googleTrands}
-      </table>
+    <div className="trend__wrapper">
+      <table className="trend__box__wrapper">{googleTrands}</table>
     </div>
   );
 }
