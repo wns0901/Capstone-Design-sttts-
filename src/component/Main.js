@@ -3,9 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSpeechRecognition } from 'react-speech-kit';
 import './Main.css';
 import './chat.css';
-import Search from './search';
-import { test } from './netflix';
-import Youtube from './Youtube';
 import ScrollBox from './box';
 import GoogleTrands from './googleTrends';
 import {
@@ -18,7 +15,6 @@ import {
 } from '@chatscope/chat-ui-kit-react';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-// const API_KEY = "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";
 const ChatbotPage = () => {
   const [command, setCommand] = useState('');
   const { listen, listening, stop } = useSpeechRecognition({
@@ -180,6 +176,7 @@ export default function Main() {
   };
 
   const changeToNews = () => {
+    console.log(API_KEY);
     setTarget('뉴스');
   };
 
