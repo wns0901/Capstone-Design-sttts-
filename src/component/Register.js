@@ -1,21 +1,22 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import registerApi from "../api/registerApi";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import registerApi from '../api/registerApi';
+import './Login.css';
 
 export default function Register() {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
-    id: "",
-    password: "",
-    passwordCheck: "",
+    id: '',
+    password: '',
+    passwordCheck: '',
   });
 
   const finishRegister = async () => {
-    console.log("확인");
+    console.log('확인');
     if (await registerApi(userInfo)) {
-      alert("회원가입 성공");
-      navigate("/login");
+      alert('회원가입 성공');
+      navigate('/');
     }
   };
   const inputUserInfo = (text) => {
@@ -24,36 +25,33 @@ export default function Register() {
     });
   };
 
-  const checkPw = (text) => {
-    if (userInfo.password === userInfo.passwordCheck) {
-      alert("동일합니다.");
-    } else {
-      alert("비밀번호를 다시 확인하세요!!");
-    }
-  };
-
   return (
-    <div>
-      <div>
-        <input name="id" placeholder="아이디" onChange={inputUserInfo}></input>
+    <div className="login__wrapper">
+      <div className="login__title__wrapper">
+        <div className="loginTitle">STTTS</div>
       </div>
-      <div>
+      <div className="login__action__wrapper">
+        <div className="login__text__title">* ID</div>
         <input
+          className="login__text__box"
+          name="id"
+          onChange={inputUserInfo}
+        ></input>
+        <div className="login__text__title">* PASSWORD</div>
+        <input
+          className="login__text__box"
           name="password"
-          placeholder="비밀번호"
+          type="password"
+          defaultValue={userInfo.password}
           onChange={inputUserInfo}
         ></input>
+        <button
+          className="signin"
+          onClick={finishRegister}
+        >
+          Register
+        </button>
       </div>
-      <div>
-        <input
-          name="passwordCheck"
-          placeholder="비밀번호 확인"
-          onChange={inputUserInfo}
-        ></input>
-        <button onClick={checkPw}>확인</button>
-      </div>
-
-      <button onClick={finishRegister}>회원가입</button>
     </div>
   );
 }

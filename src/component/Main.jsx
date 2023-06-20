@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSpeechRecognition } from "react-speech-kit";
-import "./Main.css";
-import Search from "./search";
-import { test } from "./netflix";
-import Youtube from "./Youtube";
-import ScrollBox from "./box";
-import GoogleTrands from "./googleTrends";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSpeechRecognition } from 'react-speech-kit';
+import './Main.css';
+import Search from './search';
+import { test } from './netflix';
+import Youtube from './Youtube';
+import ScrollBox from './box';
+import GoogleTrands from './googleTrends';
 import {
   MainContainer,
   ChatContainer,
@@ -14,13 +14,13 @@ import {
   Message,
   MessageInput,
   TypingIndicator,
-} from "@chatscope/chat-ui-kit-react";
-import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+} from '@chatscope/chat-ui-kit-react';
+import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const ChatbotPage = () => {
-  const [command, setCommand] = useState("");
+  const [command, setCommand] = useState('');
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
       setCommand(result);
@@ -33,16 +33,16 @@ const ChatbotPage = () => {
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
-      message: "안녕하세요 무엇을 도와드릴까요? ",
-      sender: "ChatGPT",
+      message: '안녕하세요 무엇을 도와드릴까요? ',
+      sender: 'ChatGPT',
     },
   ]);
 
   const handleSend = async (message) => {
     const newMessage = {
       message: message,
-      sender: "user",
-      direction: "outgoing",
+      sender: 'user',
+      direction: 'outgoing',
     };
 
     const newMessages = [...messages, newMessage];
@@ -51,39 +51,39 @@ const ChatbotPage = () => {
 
     setTyping(true);
     if (message == command) {
-      setCommand("");
+      setCommand('');
     }
     await processMesaageToChatGPT(newMessages);
   };
 
   async function processMesaageToChatGPT(chatMessages) {
     let apiMessages = chatMessages.map((value) => {
-      let role = "";
-      if (value.sender == "ChatGPT") {
-        role = "assistant";
+      let role = '';
+      if (value.sender == 'ChatGPT') {
+        role = 'assistant';
       } else {
-        role = "user";
+        role = 'user';
       }
       return { role: role, content: value.message };
     });
     const systemMessage = {
-      role: "system",
-      content: "test",
+      role: 'system',
+      content: 'test',
     };
     const apiRequestBody = {
-      prompt: chatMessages.map((message) => message.message).join("\n") + "\n",
+      prompt: chatMessages.map((message) => message.message).join('\n') + '\n',
       max_tokens: 1024,
       temperature: 0.7,
       n: 1,
-      stop: ".",
+      stop: '.',
     };
     await fetch(
-      "https://api.openai.com/v1/engines/text-davinci-003/completions",
+      'https://api.openai.com/v1/engines/text-davinci-003/completions',
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Authorization: "Bearer " + API_KEY,
-          "Content-Type": "application/json",
+          Authorization: 'Bearer ' + API_KEY,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(apiRequestBody),
       }
@@ -97,7 +97,7 @@ const ChatbotPage = () => {
           ...chatMessages,
           {
             message: data.choices[0].text,
-            sender: "ChatGPT",
+            sender: 'ChatGPT',
           },
         ]);
         setTyping(false);
@@ -105,7 +105,7 @@ const ChatbotPage = () => {
   }
   return (
     <div>
-      <div style={{ position: "relative", height: "885px", width: "28vw" }}>
+      <div style={{ position: 'relative', height: '885px', width: '28vw' }}>
         <MainContainer>
           <ChatContainer>
             {listening && (
@@ -122,11 +122,16 @@ const ChatbotPage = () => {
                 typing ? <TypingIndicator content="ChatGPT is typing" /> : null
               }
               style={{
-                fontSize: "20px",
+                fontSize: '20px',
               }}
             >
               {messages.map((message, i) => {
-                return <Message key={i} model={message} />;
+                return (
+                  <Message
+                    key={i}
+                    model={message}
+                  />
+                );
               })}
             </MessageList>
             <MessageInput
@@ -140,10 +145,10 @@ const ChatbotPage = () => {
           {
             <button
               style={{
-                position: "absolute",
+                position: 'absolute',
                 zIndex: 9999,
-                top: "840px",
-                left: "2px",
+                top: '840px',
+                left: '2px',
               }}
               className="search__box__btn"
               onMouseDown={listen}
@@ -162,10 +167,10 @@ const ChatbotPage = () => {
 };
 
 export default function Main() {
-  const [command, setCommand] = useState("");
-  const [target, setTarget] = useState("");
-  const axios = require("axios");
-  const cheerio = require("cheerio");
+  const [command, setCommand] = useState('');
+  const [target, setTarget] = useState('');
+  const axios = require('axios');
+  const cheerio = require('cheerio');
   const navigator = useNavigate();
 
   const { listen, listening, stop } = useSpeechRecognition({
@@ -179,23 +184,23 @@ export default function Main() {
   };
 
   const changeToNews = () => {
-    setTarget("뉴스");
+    setTarget('뉴스');
   };
 
   const changeToYoutube = () => {
-    setTarget("유튜브");
+    setTarget('유튜브');
   };
 
   const moveToNetflix = () => {
-    console.log("### start");
-    navigator("/netflix");
+    console.log('### start');
+    navigator('/netflix');
   };
 
   const changeToJusic = () => {
-    setTarget("증권");
+    setTarget('증권');
   };
   const changeToMusic = () => {
-    setTarget("뮤직");
+    setTarget('뮤직');
   };
 
   return (
@@ -203,7 +208,7 @@ export default function Main() {
       <div className="main__wrapper__header">
         <div className="header__title">STTTS</div>
         <div className="my__page">
-          <div className="name">ooo님</div>
+          <div className="name">{localStorage.getItem('user')}님</div>
           <button className="logout">로그아웃</button>
         </div>
       </div>
@@ -234,23 +239,35 @@ export default function Main() {
             <span id="message">원하는 정보를 찾아보세요 !</span>
           </div>
           <div className="action__btn__wrapper">
-            <button className="mainBtn" onClick={changeToNews}>
+            <button
+              className="mainBtn"
+              onClick={changeToNews}
+            >
               뉴스
             </button>
-            <button className="mainBtn" onClick={changeToJusic}>
+            <button
+              className="mainBtn"
+              onClick={changeToJusic}
+            >
               증권
             </button>
-            <button className="mainBtn" onClick={changeToMusic}>
+            <button
+              className="mainBtn"
+              onClick={changeToMusic}
+            >
               음악
             </button>
-            <button className="mainBtn" onClick={changeToYoutube}>
+            <button
+              className="mainBtn"
+              onClick={changeToYoutube}
+            >
               유튜브
             </button>
           </div>
           {listening && <div>음성인식 활성화 중</div>}
           <div className="action__history__box">
             <div className="history__title">
-              {target ? target : "선택해주세요"}
+              {target ? target : '선택해주세요'}
             </div>
             <div className="history__keyword">
               <ScrollBox target={target} />

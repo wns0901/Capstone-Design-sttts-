@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSpeechRecognition } from 'react-speech-kit';
 import loginApi from '../api/loginApi';
+import './Login.css';
 
 export default function Login() {
   const [userInfo, setUserInfo] = useState({
@@ -27,9 +28,13 @@ export default function Login() {
   const login = async () => {
     const result = await loginApi(userInfo);
     if (result) {
-      alert('로그인 완료');
+      localStorage.setItem('user', userInfo.id);
       navigate('/main');
     }
+  };
+
+  const register = () => {
+    navigate('/register');
   };
 
   const whoClick = (e) => {
@@ -48,40 +53,38 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <div>
+    <div className="login__wrapper">
+      <div className="login__title__wrapper">
+        <div className="loginTitle">STTTS</div>
+      </div>
+      <div className="login__action__wrapper">
+        <div className="login__text__title">* ID</div>
         <input
+          className="login__text__box"
           name="id"
-          placeholder="id"
           defaultValue={userInfo.id}
           onChange={inputUserInfo}
         ></input>
-        <button
-          name="id"
-          onMouseDown={onMouse}
-          onMouseUp={stop}
-        >
-          🎤
-        </button>
-      </div>
-      <div>
+        <div className="login__text__title">* PASSWORD</div>
         <input
+          className="login__text__box"
           name="password"
-          placeholder="password"
+          type="password"
           defaultValue={userInfo.password}
           onChange={inputUserInfo}
         ></input>
-        <button
-          name="pw"
-          onMouseDown={onMouse}
-          onMouseUp={stop}
+        <a
+          className="signUp"
+          onClick={register}
         >
-          🎤
+          회원이 아니신가요?
+        </a>
+        <button
+          className="signin"
+          onMouseUp={login}
+        >
+          LOGIN
         </button>
-      </div>
-      <div>
-        <button onMouseUp={login}>로그인</button>
-        {listening && <div>음성인식 활성화 중</div>}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import jusicDataApi from "../api/jusicApi";
-import "./jusic.css";
+import { useEffect, useState } from 'react';
+import jusicDataApi from '../api/jusicApi';
+import './jusic.css';
 export default function Jusic() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -13,7 +13,10 @@ export default function Jusic() {
   }, []);
 
   const jusic = data.map((data, index) => (
-    <tbody id="ju__box__wrapper" key={index}>
+    <tbody
+      id="ju__box__wrapper"
+      key={index}
+    >
       <tr id="ju__box__wrapper">
         <td height={50}>{data.name}</td>
         <td>{data.price}</td>
@@ -22,10 +25,10 @@ export default function Jusic() {
             <img
               src={data.upDown}
               style={{
-                width: "7px",
-                height: "6px",
+                width: '11px',
+                height: '11px',
                 border: 0,
-                borderRadius: "0%",
+                borderRadius: '0%',
               }}
             />
           ) : null}
@@ -39,17 +42,20 @@ export default function Jusic() {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        fontSize: "1.3em",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontSize: '1.3em',
       }}
     >
       <table id="ju__table__wrapper">
         <thead>
           <tr id="ju__header">
-            <th width={200} height={50}>
+            <th
+              width={200}
+              height={50}
+            >
               종목명
             </th>
             <th width={200}>현재가</th>

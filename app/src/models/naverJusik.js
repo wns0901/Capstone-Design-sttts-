@@ -4,7 +4,7 @@ const iconv = require('iconv-lite');
 
 class Jusick {
   async getJusick() {
-    const url = 'https://finance.naver.com/sise/sise_market_sum.nhn?&page=1';
+    const url = 'https://finance.naver.com/sise/sise_quant.naver';
 
     const result = await axios.get(url, { responseType: 'arraybuffer' });
 
@@ -16,7 +16,7 @@ class Jusick {
       const price = $(element).find('td:nth-child(3)').text().trim();
       const upDown = $(element).find('td:nth-child(4) > img').attr('src');
       const diff = $(element).find('td:nth-child(4)').text().trim();
-      const volume = $(element).find('td:nth-child(10)').text().trim();
+      const volume = $(element).find('td:nth-child(6)').text().trim();
       if (name) {
         dataList.push({
           name,
