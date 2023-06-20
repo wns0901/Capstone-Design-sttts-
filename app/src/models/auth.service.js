@@ -1,4 +1,4 @@
-const Repository = require("./auth.reposiory");
+const Repository = require('./auth.reposiory');
 
 class Auth {
   async register(clientInfo) {
@@ -7,14 +7,18 @@ class Auth {
   }
 
   async login(clientInfo) {
-    const userInfo = await Repository.login(clientInfo.id);
-    const isOurUser =
-      userInfo.id === clientInfo.id &&
-      userInfo.password === clientInfo.password;
-    if (!isOurUser) {
+    try {
+      const userInfo = await Repository.login(clientInfo.id);
+      const isOurUser =
+        userInfo.id === clientInfo.id &&
+        userInfo.password === clientInfo.password;
+      if (!isOurUser) {
+        return false;
+      }
+      return userInfo.userNo;
+    } catch (error) {
       return false;
     }
-    return userInfo.userNo;
   }
 }
 

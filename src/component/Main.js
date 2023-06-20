@@ -15,6 +15,8 @@ import {
 } from '@chatscope/chat-ui-kit-react';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+let count = 0;
+
 const ChatbotPage = () => {
   const [command, setCommand] = useState('');
   const { listen, listening, stop } = useSpeechRecognition({
@@ -22,6 +24,42 @@ const ChatbotPage = () => {
       setCommand(result);
     },
   });
+
+  const getSpeech = (text) => {
+    let voices = [];
+
+    // 디바이스에 내장된 voice를 가져오는 함수
+    const setVoiceList = () => {
+      voices = window.speechSynthesis.getVoices();
+      speech(text); // 음성 목록이 업데이트된 후에 speech 함수를 호출
+    };
+
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      // voice list에 변경됐을 때, voice를 다시 가져옴
+      window.speechSynthesis.onvoiceschanged = setVoiceList;
+    }
+
+    const speech = (txt) => {
+      const lang = 'ko-KR';
+      const utterThis = new SpeechSynthesisUtterance(txt);
+      utterThis.lang = lang;
+
+      /* 한국어 voice 찾기
+         디바이스 별로 한국어는 ko-KR 또는 ko_KR로 voice가 정의되어 있음
+      */
+      const kor_voice = voices.find(
+        (elem) => elem.lang === lang || elem.lang === lang.replace('-', '_')
+      );
+
+      // 한국어 voice가 있다면 utterance에 목소리를 설정하고 재생
+      if (kor_voice) {
+        utterThis.voice = kor_voice;
+        window.speechSynthesis.speak(utterThis);
+      }
+    };
+
+    setVoiceList(); // 초기 음성 목록 가져오기
+  };
   const doCommand = () => {
     console.log(command);
   };
@@ -88,7 +126,6 @@ const ChatbotPage = () => {
         return data.json();
       })
       .then((data) => {
-        console.log(data);
         setMessages([
           ...chatMessages,
           {
@@ -97,6 +134,7 @@ const ChatbotPage = () => {
           },
         ]);
         setTyping(false);
+        getSpeech(data.choices[0].text);
       });
   }
   return (
@@ -264,7 +302,6 @@ export default function Main() {
               <div className="trend__header__left">실시간급상승</div>
               <div className="trend__header__right">▼</div>
             </div>
-            {/* <ScrollBox target={'트렌드'} /> */}
             <GoogleTrands />
           </div>
         </div>

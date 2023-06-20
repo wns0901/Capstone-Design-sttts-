@@ -16,7 +16,7 @@ const process = {
   login: async (req, res) => {
     const auth = new Auth();
     const result = await auth.login(req.body);
-    return result ? res.json(result) : res.sendStatus(404);
+    return result ? res.json(result) : res.sendStatus(400);
   },
 
   getData: async (req, res) => {

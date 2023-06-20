@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSpeechRecognition } from 'react-speech-kit';
 import loginApi from '../api/loginApi';
 import './Login.css';
 
@@ -9,24 +8,12 @@ export default function Login() {
     id: '',
     password: '',
   });
-  const [who, setWho] = useState('');
 
-  const { listen, listening, stop } = useSpeechRecognition({
-    onResult: (result) => {
-      // 음성인식 결과가 value 상태값으로 할당됩니다.
-      who === 'id' ? setInfo('id', result) : setInfo('password', result);
-    },
-  });
-
-  const setInfo = (type, value) => {
-    setUserInfo((user) => {
-      return { ...user, [type]: value };
-    });
-  };
   const navigate = useNavigate();
 
   const login = async () => {
     const result = await loginApi(userInfo);
+    console.log(result);
     if (result) {
       localStorage.setItem('user', userInfo.id);
       navigate('/main');
@@ -37,19 +24,16 @@ export default function Login() {
     navigate('/register');
   };
 
-  const whoClick = (e) => {
-    setWho(e.target.name);
-  };
-
   const inputUserInfo = (text) => {
     setUserInfo((user) => {
       return { ...user, [text.target.name]: text.target.value };
     });
   };
 
-  const onMouse = (e) => {
-    whoClick(e);
-    listen();
+  const activeEnter = (e) => {
+    if (e.key === 'Enter') {
+      login();
+    }
   };
 
   return (
@@ -72,6 +56,7 @@ export default function Login() {
           type="password"
           defaultValue={userInfo.password}
           onChange={inputUserInfo}
+          onKeyDown={activeEnter}
         ></input>
         <a
           className="signUp"

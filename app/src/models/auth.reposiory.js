@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const db = require('../config/db');
 
 class Repository {
   static async register(id, password) {
@@ -8,9 +8,14 @@ class Repository {
   }
 
   static async login(id) {
-    const query = `SELECT no AS userNo, id, password FROM user_info WHERE id = ?`;
+    try {
+      const query = `SELECT no AS userNo, id, password FROM user_info WHERE id = ?`;
 
-    return (await db.query(query, [id]))[0][0];
+      return (await db.query(query, [id]))[0][0];
+    } catch (error) {
+      console.log(1);
+      console.log(error);
+    }
   }
 }
 

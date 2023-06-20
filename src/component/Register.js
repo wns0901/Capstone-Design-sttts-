@@ -25,6 +25,12 @@ export default function Register() {
     });
   };
 
+  const activeEnter = (e) => {
+    if (e.key === 'Enter') {
+      finishRegister();
+    }
+  };
+
   return (
     <div className="login__wrapper">
       <div className="login__title__wrapper">
@@ -44,6 +50,7 @@ export default function Register() {
           type="password"
           defaultValue={userInfo.password}
           onChange={inputUserInfo}
+          onKeyDown={activeEnter}
         ></input>
         <button
           className="signin"
