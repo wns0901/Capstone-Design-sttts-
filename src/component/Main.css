@@ -11,11 +11,7 @@
 }
 
 .mainClass {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  min-width: 1300px;
+  min-width: 1500px;
   overflow: hidden;
 }
 
@@ -29,7 +25,7 @@
 
 .main__wrapper__header {
   height: 70px;
-  width: 1500px;
+  width: 1700px;
 
   background-color: #1b1b1b;
   border-bottom: 2px solid #5f5f5f;
@@ -82,14 +78,14 @@
 }
 
 .main__wrapper__body {
-  width: 1500px;
+  width: 1700px;
   height: 800px;
   display: flex;
   flex-direction: row;
 }
 
 .wrapper__chat__box {
-  width: 400px;
+  width: 450px;
   height: 790px;
   margin: 10px 10px 10px 5px;
 }
@@ -115,7 +111,7 @@
 }
 
 .wrapper__action__box {
-  width: 700px;
+  width: 800px;
   height: 800px;
   margin: 5px;
 
@@ -186,7 +182,7 @@
 }
 
 .main__btn__news {
-  width: 160px;
+  width: 190px;
   height: 150px;
   background-size: cover;
   background-image: url("./image/news_image.jpg");
@@ -209,7 +205,7 @@
 }
 
 .main__btn__yt {
-  width: 160px;
+  width: 190px;
   height: 150px;
   background-size: cover;
   background-image: url("./image/yt_image.jpg");
@@ -232,7 +228,7 @@
 }
 
 .main__btn__ju {
-  width: 160px;
+  width: 190px;
   height: 150px;
   background-size: cover;
   background-image: url("./image/ju_image.jpg");
@@ -255,7 +251,7 @@
 }
 
 .main__btn__music {
-  width: 160px;
+  width: 190px;
   height: 150px;
   background-size: cover;
   background-image: url("./image/music_image.jpg");
@@ -306,7 +302,7 @@
 }
 
 .wrapper__trend__box {
-  width: 400px;
+  width: 450px;
   margin: 10px 0px 0 10px;
   height: 790px;
 }
@@ -319,7 +315,7 @@
 }
 
 .trend__header__left {
-  width: 340px;
+  width: 390px;
   height: 50px;
   border: 5px solid #35588d;
 
@@ -344,23 +340,10 @@
   align-items: center;
 }
 
-.trend__body {
-  height: 720px;
-  border: 4px solid #35588d;
-  border-top: 0px;
-  border-radius: 0 0 15px 15px;
-  box-shadow: 1px 1px 10px #a0a9c2;
-}
-
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .mainClass {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-
-    min-width: 500px;
+    width: 800px;
+    overflow-x: hidden;
   }
 
   .main__wrapper {
@@ -369,11 +352,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 800px;
   }
 
   .main__wrapper__header {
     height: 70px;
-
+    width: 800px;
     background-color: #1b1b1b;
     border-bottom: 2px solid #5f5f5f;
     display: flex;
@@ -406,7 +390,7 @@
   }
 
   .main__wrapper__body {
-    width: 600px;
+    width: 800px;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -415,7 +399,7 @@
   }
 
   .wrapper__chat__box {
-    width: 500px;
+    width: 700px;
     height: 790px;
     margin: 10px 10px 10px 5px;
   }
@@ -441,7 +425,7 @@
   }
 
   .wrapper__action__box {
-    width: 500px;
+    width: 700px;
     height: 800px;
     margin: 5px;
 
@@ -597,8 +581,8 @@
   }
 
   .action__page__box {
-    height: 418px;
-    margin-top: 10px;
+    height: 600px;
+    margin-top: 5px;
   }
 
   /* .page__title {
@@ -613,7 +597,7 @@
   } */
 
   .page__area {
-    height: 600px;
+    height: 420px;
   }
 
   .wrapper__trend__box {

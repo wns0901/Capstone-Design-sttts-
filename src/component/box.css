@@ -1,0 +1,13 @@
+#box-min800 {
+  height: 410px;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+  top: 10px;
+}
+
+@media (max-width: 800px) {
+  #box-min800 {
+    height: 600px;
+  }
+}

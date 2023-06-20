@@ -4,6 +4,7 @@ import Youtube from "./Youtube";
 import Melon from "./Melon";
 import Jusic from "./Jusic";
 import GoogleTrands from "./googleTrends";
+import "./box.css";
 
 class ScrollBox extends Component {
   scrollChange = (param) => {
@@ -16,21 +17,13 @@ class ScrollBox extends Component {
   };
   render() {
     const target = this.props.target;
-    const style = {
-      // border: "1px solid black",
-      height: "400px",
-      width: "100%",
-      overflow: "auto",
-      position: "relative",
-      top: "20px",
-    };
 
     const innerStyle = {
       width: "100%",
     };
     return (
       <div
-        style={style}
+        id="box-min800"
         ref={(ref) => {
           this.box = ref;
         }}

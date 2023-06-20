@@ -34,15 +34,15 @@ export default function Melon() {
           <img
             src={data.imgSrc}
             style={{
-              width: "60px",
-              height: "60px",
+              width: "100px",
+              height: "100px",
               border: 0,
               borderRadius: "0%",
             }}
           />
         </td>
         <td
-          width={530}
+          width={700}
           align="center"
           style={{
             color: "#3d4346",

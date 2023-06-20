@@ -15,13 +15,21 @@ import {
   Message,
   MessageInput,
   TypingIndicator,
-  MessageGroupHeader,
 } from "@chatscope/chat-ui-kit-react";
-// import "@chatscope/chat-ui-kit-styles/dist/default/styles.css";
 
-const API_KEY = "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";
-
+const API_KEY = process.env.REACT_APP_API_KEY;
+// const API_KEY = "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";
 const ChatbotPage = () => {
+  const [command, setCommand] = useState("");
+  const { listen, listening, stop } = useSpeechRecognition({
+    onResult: (result) => {
+      setCommand(result);
+    },
+  });
+  const doCommand = () => {
+    console.log(command);
+  };
+
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -42,6 +50,9 @@ const ChatbotPage = () => {
     setMessages(newMessages);
 
     setTyping(true);
+    if (message == command) {
+      setCommand("");
+    }
     await processMesaageToChatGPT(newMessages);
   };
 
@@ -97,20 +108,49 @@ const ChatbotPage = () => {
       <div className="chat__box__body">
         <MainContainer>
           <ChatContainer>
+            {listening && <div>음성인식 활성화 중</div>}
             <MessageList
               typingIndicator={
                 typing ? <TypingIndicator content="답변을 기다리는 중" /> : null
               }
+              style={{
+                fontSize: "20px",
+              }}
             >
               {messages.map((message, i) => {
                 return <Message key={i} model={message} />;
               })}
             </MessageList>
+
             <MessageInput
               placeholder="메세지를 입력해주세요"
               onSend={handleSend}
-            />
+              value={command}
+              onChange={setCommand}
+            ></MessageInput>
           </ChatContainer>
+          <button
+            style={{
+              position: "absolute",
+              zIndex: 9999,
+              height: "25px",
+              top: "695px",
+              left: "5px",
+              fontSize: "1em",
+              background: "white",
+              border: "none",
+
+              cursor: "pointer",
+            }}
+            className="search__box__btn"
+            onMouseDown={listen}
+            onMouseUp={() => {
+              stop();
+              doCommand();
+            }}
+          >
+            🎤
+          </button>
         </MainContainer>
       </div>
     </div>

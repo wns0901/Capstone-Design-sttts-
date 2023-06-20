@@ -16,19 +16,16 @@ export default function GoogleTrands() {
 
   const googleTrands = data.map((data) => (
     <div className="trend__keyword__box" key={data.id}>
-      <div id="trend__rank">{data.id}위</div>
-      <div id="trend__title">{data.title}</div>
-      <div id="trend__count">{data.traffic}</div>
-      <div id="trend__link">
-        <a
-          id="trend_title"
-          href={data.discription.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GO
-        </a>
-      </div>
+      <a
+        id="trend_title"
+        href={data.discription.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div id="trend__rank">{data.id}위</div>
+        <div id="trend__title">{data.title}</div>
+        <div id="trend__count">{data.traffic}</div>
+      </a>
     </div>
   ));
 

@@ -16,15 +16,12 @@ export default function Search() {
 
   const news = data.map((data) => (
     <div id="news__box__wrapper" key={data.id}>
-      <div id="news__image">
-        <img src={data.img} alt="" />
-      </div>
-      <div id="news__title">{data.title}</div>
-      <div id="news__link">
-        <a href={data.link} target="_blank" rel="noopener noreferrer">
-          뉴스보기
-        </a>
-      </div>
+      <a href={data.link} target="_blank" rel="noopener noreferrer">
+        <div id="news__image">
+          <img src={data.img} alt="" />
+        </div>
+        <div id="news__title">{data.title}</div>
+      </a>
     </div>
   ));
 
