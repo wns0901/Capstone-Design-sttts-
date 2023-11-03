@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 const melonDataApi = async () => {
-  const URL = 'http://sttts.kro.kr:3001/api/melon';
+  const URL = "http://localhost:3001/api/melon";
   const res = await axios.post(URL);
 
   return res.data;

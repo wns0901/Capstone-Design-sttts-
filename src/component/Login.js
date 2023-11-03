@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import loginApi from '../api/loginApi';
-import './Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import loginApi from "../api/loginApi";
+import "./Login.css";
 
 export default function Login() {
   const [userInfo, setUserInfo] = useState({
-    id: '',
-    password: '',
+    id: "",
+    password: "",
   });
 
   const navigate = useNavigate();
@@ -15,13 +15,13 @@ export default function Login() {
     const result = await loginApi(userInfo);
     console.log(result);
     if (result) {
-      localStorage.setItem('user', userInfo.id);
-      navigate('/main');
+      localStorage.setItem("user", userInfo.id);
+      navigate("/main");
     }
   };
 
   const register = () => {
-    navigate('/register');
+    navigate("/register");
   };
 
   const inputUserInfo = (text) => {
@@ -31,7 +31,7 @@ export default function Login() {
   };
 
   const activeEnter = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       login();
     }
   };
@@ -58,16 +58,10 @@ export default function Login() {
           onChange={inputUserInfo}
           onKeyDown={activeEnter}
         ></input>
-        <a
-          className="signUp"
-          onClick={register}
-        >
+        <a className="signUp" onClick={register}>
           회원이 아니신가요?
         </a>
-        <button
-          className="signin"
-          onMouseUp={login}
-        >
+        <button className="signin" onMouseUp={login}>
           LOGIN
         </button>
       </div>

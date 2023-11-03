@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSpeechRecognition } from 'react-speech-kit';
-import './Main.css';
-import './chat.css';
-import ScrollBox from './box';
-import GoogleTrands from './googleTrends';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSpeechRecognition } from "react-speech-kit";
+import "./Main.css";
+import "./chat.css";
+import ScrollBox from "./box";
+import GoogleTrands from "./googleTrends";
 import {
   MainContainer,
   ChatContainer,
@@ -12,13 +12,13 @@ import {
   Message,
   MessageInput,
   TypingIndicator,
-} from '@chatscope/chat-ui-kit-react';
+} from "@chatscope/chat-ui-kit-react";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 let count = 0;
 
 const ChatbotPage = () => {
-  const [command, setCommand] = useState('');
+  const [command, setCommand] = useState("");
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result) => {
       setCommand(result);
@@ -40,7 +40,7 @@ const ChatbotPage = () => {
     }
 
     const speech = (txt) => {
-      const lang = 'ko-KR';
+      const lang = "ko-KR";
       const utterThis = new SpeechSynthesisUtterance(txt);
       utterThis.lang = lang;
 
@@ -48,7 +48,7 @@ const ChatbotPage = () => {
          디바이스 별로 한국어는 ko-KR 또는 ko_KR로 voice가 정의되어 있음
       */
       const kor_voice = voices.find(
-        (elem) => elem.lang === lang || elem.lang === lang.replace('-', '_')
+        (elem) => elem.lang === lang || elem.lang === lang.replace("-", "_")
       );
 
       // 한국어 voice가 있다면 utterance에 목소리를 설정하고 재생
@@ -67,16 +67,16 @@ const ChatbotPage = () => {
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
-      message: '안녕하세요 무엇을 도와드릴까요? ',
-      sender: 'ChatGPT',
+      message: "안녕하세요 무엇을 도와드릴까요? ",
+      sender: "ChatGPT",
     },
   ]);
 
   const handleSend = async (message) => {
     const newMessage = {
       message: message,
-      sender: 'user',
-      direction: 'outgoing',
+      sender: "user",
+      direction: "outgoing",
     };
 
     const newMessages = [...messages, newMessage];
@@ -85,39 +85,39 @@ const ChatbotPage = () => {
 
     setTyping(true);
     if (message == command) {
-      setCommand('');
+      setCommand("");
     }
     await processMesaageToChatGPT(newMessages);
   };
 
   async function processMesaageToChatGPT(chatMessages) {
     let apiMessages = chatMessages.map((value) => {
-      let role = '';
-      if (value.sender == 'ChatGPT') {
-        role = 'assistant';
+      let role = "";
+      if (value.sender == "ChatGPT") {
+        role = "assistant";
       } else {
-        role = 'user';
+        role = "user";
       }
       return { role: role, content: value.message };
     });
     const systemMessage = {
-      role: 'system',
-      content: 'test',
+      role: "system",
+      content: "test",
     };
     const apiRequestBody = {
-      prompt: chatMessages.map((message) => message.message).join('\n') + '\n',
+      prompt: chatMessages.map((message) => message.message).join("\n") + "\n",
       max_tokens: 1024,
       temperature: 0.7,
       n: 1,
-      stop: '.',
+      stop: ".",
     };
     await fetch(
-      'https://api.openai.com/v1/engines/text-davinci-003/completions',
+      "https://api.openai.com/v1/engines/text-davinci-003/completions",
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          Authorization: 'Bearer ' + API_KEY,
-          'Content-Type': 'application/json',
+          Authorization: "Bearer " + API_KEY,
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(apiRequestBody),
       }
@@ -130,7 +130,7 @@ const ChatbotPage = () => {
           ...chatMessages,
           {
             message: data.choices[0].text,
-            sender: 'ChatGPT',
+            sender: "ChatGPT",
           },
         ]);
         setTyping(false);
@@ -148,16 +148,11 @@ const ChatbotPage = () => {
                 typing ? <TypingIndicator content="답변을 기다리는 중" /> : null
               }
               style={{
-                fontSize: '20px',
+                fontSize: "20px",
               }}
             >
               {messages.map((message, i) => {
-                return (
-                  <Message
-                    key={i}
-                    model={message}
-                  />
-                );
+                return <Message key={i} model={message} />;
               })}
             </MessageList>
 
@@ -170,16 +165,16 @@ const ChatbotPage = () => {
           </ChatContainer>
           <button
             style={{
-              position: 'absolute',
+              position: "absolute",
               zIndex: 9999,
-              height: '25px',
-              top: '695px',
-              left: '5px',
-              fontSize: '1em',
-              background: 'white',
-              border: 'none',
+              height: "25px",
+              top: "695px",
+              left: "5px",
+              fontSize: "1em",
+              background: "white",
+              border: "none",
 
-              cursor: 'pointer',
+              cursor: "pointer",
             }}
             className="search__box__btn"
             onMouseDown={listen}
@@ -197,10 +192,10 @@ const ChatbotPage = () => {
 };
 
 export default function Main() {
-  const [command, setCommand] = useState('');
-  const [target, setTarget] = useState('');
-  const axios = require('axios');
-  const cheerio = require('cheerio');
+  const [command, setCommand] = useState("");
+  const [target, setTarget] = useState("");
+  const axios = require("axios");
+  const cheerio = require("cheerio");
   const navigator = useNavigate();
 
   const { listen, listening, stop } = useSpeechRecognition({
@@ -215,23 +210,23 @@ export default function Main() {
 
   const changeToNews = () => {
     console.log(API_KEY);
-    setTarget('뉴스');
+    setTarget("뉴스");
   };
 
   const changeToYoutube = () => {
-    setTarget('유튜브');
+    setTarget("유튜브");
   };
 
   const logout = () => {
-    localStorage.setItem('user', '');
-    navigator('/');
+    localStorage.setItem("user", "");
+    navigator("/");
   };
 
   const changeToJusic = () => {
-    setTarget('증권');
+    setTarget("증권");
   };
   const changeToMusic = () => {
-    setTarget('뮤직');
+    setTarget("뮤직");
   };
 
   return (
@@ -240,11 +235,8 @@ export default function Main() {
         <div className="main__wrapper__header">
           <div className="header__title">STTTS</div>
           <div className="my__page">
-            <div className="name">{localStorage.getItem('user')}님</div>
-            <button
-              className="logout"
-              onClick={logout}
-            >
+            <div className="name">{localStorage.getItem("user")}님</div>
+            <button className="logout" onClick={logout}>
               로그아웃
             </button>
           </div>
@@ -262,28 +254,16 @@ export default function Main() {
               <span id="action__ad__message">원하는 정보를 찾아보세요 !</span>
             </div>
             <div className="action__btn__wrapper">
-              <button
-                className="main__btn__news"
-                onClick={changeToNews}
-              >
+              <button className="main__btn__news" onClick={changeToNews}>
                 <span class="main__btn__text">NEWS</span>
               </button>
-              <button
-                className="main__btn__ju"
-                onClick={changeToJusic}
-              >
+              <button className="main__btn__ju" onClick={changeToJusic}>
                 <span class="main__btn__text">STOCKS</span>
               </button>
-              <button
-                className="main__btn__music"
-                onClick={changeToMusic}
-              >
+              <button className="main__btn__music" onClick={changeToMusic}>
                 <span class="main__btn__text">MUSIC</span>
               </button>
-              <button
-                className="main__btn__yt"
-                onClick={changeToYoutube}
-              >
+              <button className="main__btn__yt" onClick={changeToYoutube}>
                 <span class="main__btn__text">TV</span>
               </button>
             </div>
